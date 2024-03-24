@@ -15,6 +15,12 @@
 
     ![p1 5](https://github.com/Flower2103/practica1.5/assets/143040278/0c7ef1a5-62bf-4784-8a51-6dea5b37c3fc)
 
+## Práctica 2
+- Se agrupan los tokens segun las reglas JSON
+- Se agrupan las palabras || textos dentro de los caracteres "texto".
+- Si el numero de " no corresponde con el abrir y cerrar en el mismo renglon el programa debera regresar un error de comillas dobles.
+
+
 
 
 ------------

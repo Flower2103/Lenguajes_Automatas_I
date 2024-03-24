@@ -6,7 +6,7 @@ import json
 tokens = {} # Diccionario para almacenar los tokens del archivo .txt
 # Cargar tokens desde el archivo.txt
 def cargar_tokens():
-    with open('lenguajes_A1/catalogo_tokens.txt', 'r') as archivo_tokens:
+    with open('p1.5/catalogo_tokens.txt', 'r') as archivo_tokens:
         for linea in archivo_tokens:
             clave, valor = linea.strip().split(':')
             tokens[clave] = int(valor)
@@ -14,7 +14,7 @@ def cargar_tokens():
 
 # Abrir archivo JSON, leer y asignarlo a la variable data
 def leer_json():
-    with open('lenguajes_A1/nombre.json', 'r') as myfile:
+    with open('p1.5/nombre.json', 'r') as myfile:
         data = myfile.read()
     return data
 

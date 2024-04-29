@@ -58,15 +58,37 @@ def confirmar_string(array):
 
 def token_string(array):
     tokens= []
-    agrupados = False
+    grupo_string = False
 
     for token, _ in array:  
         if (token >= 65 and token <= 90) or (token >= 97 and token <= 122):
-            if not agrupados:
+            if not grupo_string:
                 tokens.append(555)
-                agrupados = True
+                grupo_string = True
         else:
-            agrupados = False
+            grupo_string = False
+            tokens.append(token)
+    return tokens
+
+
+def token_numeric(array):
+    tokens = []
+    grupo_decimal = False
+    grupo_int = False
+
+    for token, _ in array:
+        if ( token >= 48 and token <= 57):
+            if not grupo_int and not grupo_decimal:
+                tokens.append(666) # entero
+                grupo_int = True
+        elif (token == 46):
+            if grupo_int:
+                tokens.pop()
+                tokens.append(777) # decimal
+                grupo_int = True
+        else: 
+            grupo_int = False
+            grupo_decimal = False
             tokens.append(token)
     return tokens
 
@@ -75,13 +97,15 @@ def main():
     tokens = cargar_tokens()
     data = leer_json()
     resultado = procesar_caracteres(data , tokens)
+    tokens_string = token_string(resultado)
+    tokens_numeric = token_numeric(resultado)
 
     confirmar_json(resultado)
-    token_string(resultado)
     confirmar_string(resultado)
-    
     imprimir_tokens_json(resultado)
-    print(token_string(resultado))
+
+    print(tokens_string)
+    print(tokens_numeric)
 
 def imprimir_tokens_json(resultado):
     for token, caracter in resultado:

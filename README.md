@@ -19,6 +19,8 @@
 - Se agrupan los tokens segun las reglas JSON
 - Se agrupan las palabras || textos dentro de los caracteres "texto".
 - Si el numero de " no corresponde con el abrir y cerrar en el mismo renglon el programa debera regresar un error de comillas dobles.
+- Se agurpan los tipos numericos
+- Se agregaron nuevos tokens al catalogo (numericos)
 
 
 

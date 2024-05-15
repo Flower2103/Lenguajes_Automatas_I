@@ -93,12 +93,33 @@ def token_numeric(array):
     return tokens
 
 
+def token_date(array):
+    tokens = []
+    buffer = ''  #Acumular los dígitos de la fecha
+
+    for token, _ in array:
+        if token == 45:  # 45 = -
+            if buffer:  # Si hay dígitos en el buffer, los agregamos como token 888
+                tokens.append(888)
+                buffer = ''  #Reiniciar
+            tokens.append(token) 
+        elif token >= 48 and token <= 57:  # Si encontramos un dígito
+            buffer += chr(token)  #Agregamos el dígito al buffer
+        elif buffer: 
+            tokens.append(888)
+            buffer = ''  
+        else:
+            tokens.append(token)  #Agregamos el token normalmente
+    return tokens
+
+
 def main():
     tokens = cargar_tokens()
     data = leer_json()
     resultado = procesar_caracteres(data , tokens)
     tokens_string = token_string(resultado)
     tokens_numeric = token_numeric(resultado)
+    tokens_date = token_date(resultado)
 
     confirmar_json(resultado)
     confirmar_string(resultado)
@@ -106,6 +127,7 @@ def main():
 
     print(tokens_string)
     print(tokens_numeric)
+    print(tokens_date)
 
 def imprimir_tokens_json(resultado):
     for token, caracter in resultado:

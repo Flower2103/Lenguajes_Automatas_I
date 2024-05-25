@@ -85,7 +85,7 @@ def token_numeric(array):
             if grupo_int:
                 tokens.pop()
                 tokens.append(777) # decimal
-                grupo_int = True
+                grupo_decimal = True
         else: 
             grupo_int = False
             grupo_decimal = False
@@ -94,22 +94,33 @@ def token_numeric(array):
 
 
 def token_date(array):
-    tokens = []
-    buffer = ''  #Acumular los dígitos de la fecha
+    tokens = [] 
+    buffer = [] # Almacenar digitos de la fecha
 
     for token, _ in array:
-        if token == 45:  # 45 = -
-            if buffer:  # Si hay dígitos en el buffer, los agregamos como token 888
-                tokens.append(888)
-                buffer = ''  #Reiniciar
-            tokens.append(token) 
-        elif token >= 48 and token <= 57:  # Si encontramos un dígito
-            buffer += chr(token)  #Agregamos el dígito al buffer
-        elif buffer: 
-            tokens.append(888)
-            buffer = ''  
+        if token in [45, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57]:  # Dígitos y guión
+            buffer.append(token)
         else:
-            tokens.append(token)  #Agregamos el token normalmente
+            if len(buffer) == 10 and buffer[4] == 45 and buffer[7] == 45: # 10 datos de la fecha e índice del guión
+                if all(48 <= buffer[i] <= 57 for i in [0, 1, 2, 3, 5, 6, 8, 9]): # Digitos en los índices correctos
+                    tokens.append(888)  # Token para fecha
+                    buffer = []
+                else:
+                    tokens.extend(buffer)
+                    buffer = []
+            else:
+                tokens.extend(buffer)
+                buffer = []
+            tokens.append(token)
+    # Verifica si el buffer contiene una fecha al final del array
+    if len(buffer) == 10 and buffer[4] == 45 and buffer[7] == 45:
+        if all(48 <= buffer[i] <= 57 for i in [0, 1, 2, 3, 5, 6, 8, 9]):
+            tokens.append(888)  # Token para fecha si termina en una fecha
+        else:
+            tokens.extend(buffer)
+    else:
+        tokens.extend(buffer)
+
     return tokens
 
 
@@ -125,9 +136,9 @@ def main():
     confirmar_string(resultado)
     imprimir_tokens_json(resultado)
 
-    print(tokens_string)
-    print(tokens_numeric)
-    print(tokens_date)
+    print("STRING: " + str(tokens_string))
+    print("\nINT/DECIMAL: " + str(tokens_numeric))
+    print("\nDate: " + str(tokens_date))
 
 def imprimir_tokens_json(resultado):
     for token, caracter in resultado:

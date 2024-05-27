@@ -2,6 +2,7 @@
 # Lenguajes y Automatas
 
 import json
+import sys
 
 tokens = {} # Diccionario para almacenar los tokens del archivo .txt
 # Cargar tokens desde el archivo.txt
@@ -35,6 +36,9 @@ def procesar_caracteres(data, tokens):
             resultado_tokens.append((10, '[ENTER]'))    
         elif caracter == ':':
             resultado_tokens.append((58, ':')) 
+        else:
+            print(f"Error: el caracter '{caracter}' no tiene un token asociado.")
+            sys.exit(1) 
     return resultado_tokens   
      
 
@@ -98,29 +102,16 @@ def token_date(array):
     buffer = [] # Almacenar digitos de la fecha
 
     for token, _ in array:
-        if token in [45, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57]:  # Dígitos y guión
+        if ( token >= 47 and token <= 57):  
             buffer.append(token)
         else:
-            if len(buffer) == 10 and buffer[4] == 45 and buffer[7] == 45: # 10 datos de la fecha e índice del guión
-                if all(48 <= buffer[i] <= 57 for i in [0, 1, 2, 3, 5, 6, 8, 9]): # Digitos en los índices correctos
+            if len(buffer) == 10 and buffer[4] == 47 and buffer[7] == 47: # 10 datos de la fecha e índices para diagonal
                     tokens.append(888)  # Token para fecha
-                    buffer = []
-                else:
-                    tokens.extend(buffer)
                     buffer = []
             else:
                 tokens.extend(buffer)
                 buffer = []
             tokens.append(token)
-    # Verifica si el buffer contiene una fecha al final del array
-    if len(buffer) == 10 and buffer[4] == 45 and buffer[7] == 45:
-        if all(48 <= buffer[i] <= 57 for i in [0, 1, 2, 3, 5, 6, 8, 9]):
-            tokens.append(888)  # Token para fecha si termina en una fecha
-        else:
-            tokens.extend(buffer)
-    else:
-        tokens.extend(buffer)
-
     return tokens
 
 
@@ -136,7 +127,7 @@ def main():
     confirmar_string(resultado)
     imprimir_tokens_json(resultado)
 
-    print("STRING: " + str(tokens_string))
+    print("\nSTRING: " + str(tokens_string))
     print("\nINT/DECIMAL: " + str(tokens_numeric))
     print("\nDate: " + str(tokens_date))
 

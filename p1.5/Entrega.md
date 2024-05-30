@@ -46,7 +46,7 @@ Hasta el momento lo que realiza este programa es lo siguiente:
 
 Añadir más caracteres en el catalogo_tokens.txt.
 Añadir más especificaciones para el procesamiento de un archivo.json por ejemplo:
-1. Que se encuentren los corchetes “[ ]” correctos, tokenizar el arreglo y contenido de los corchetes se encuentre separado por “,” .
+1. Que se encuentren los corchetes “[ ]” correctos, tokenizar el arreglo y que el contenido de los corchetes se encuentre separado por “,” .
 2. Que las comas “,” continúen después de cierto caracter.
 3. Tokenizar valores null.
 4. Tokenizar valores booleanos.

@@ -42,7 +42,7 @@ Hasta el momento lo que realiza este programa es lo siguiente:
 ------------
 
 
-### Proyección :tw-2197:
+### Proyección
 
 Añadir más caracteres en el catalogo_tokens.txt.
 Añadir más especificaciones para el procesamiento de un archivo.json por ejemplo:

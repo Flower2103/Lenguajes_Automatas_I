@@ -47,7 +47,7 @@ def confirmar_json(array):
         return True
     else:
         print("[!] Error: El archivo no cumple con la estructura de inicio y/o fin de un JSON.")
-        exit()
+        sys.exit(1)
 
 
 def confirmar_string(array):
@@ -55,9 +55,9 @@ def confirmar_string(array):
     for token, _ in array:
         if token == 34:  # Verificar si es un token de comilla doble
             flag = not flag  # Cambiar el estado de la bandera
-    if flag:
+    if flag: # Si la bandera es True hay comillas sin cerrar
         print("ERROR: Las comillas no se cerraron correctamente")
-        exit()
+        sys.exit(1)
 
 
 def token_string(array):
@@ -118,7 +118,9 @@ def token_date(array):
 def main():
     tokens = cargar_tokens()
     data = leer_json()
+
     resultado = procesar_caracteres(data , tokens)
+
     tokens_string = token_string(resultado)
     tokens_numeric = token_numeric(resultado)
     tokens_date = token_date(resultado)

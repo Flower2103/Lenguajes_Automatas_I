@@ -19,12 +19,17 @@
 - Se agrupan los tokens segun las reglas JSON
 - Se agrupan las palabras || textos dentro de los caracteres "texto".
 - Si el numero de " no corresponde con el abrir y cerrar en el mismo renglon el programa debera regresar un error de comillas dobles.
-- Se agrupan los tipos numericos
-- Se agrupan los tipos fecha
-- Se agregaron nuevos tokens al catalogo (numericos)
+- Se agrupan los tipos numéricos.
+- Se agrupan los tipos fecha.
+- Se agregaron nuevos tokens al catálogo (numéricos).
 
+------------
+### Uso
 
+Para poder ejecutar de forma correcta debes asegurarte de tener Python instalado en tu ordenador (verifica la versión). A continuación se presentan dos opciones:
+- Descarga el archivo zip y extraer la carpeta. Desde la terminal de Windows: Ubicarte en la ruta de la carpeta donde se encuentra el archivo principal "main.py" y ejecutar desde la terminal "> py main.py". En caso de marcar error probablemente se deberá a las dos rutas que se encuentran en el código del archivo princial, deberás eliminar específicamente "p1.5/" y dejar el resto. También puedes utilizar un editor de código para ejecutarlo. 
 
+- Clona el repositorio. 
 
 ------------
 
